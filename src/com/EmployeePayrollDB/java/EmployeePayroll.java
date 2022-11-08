@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class EmployeePayroll {
 
@@ -13,18 +15,16 @@ public class EmployeePayroll {
 
 		try {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
-			String Select = "select * from employee_payroll";
-			PreparedStatement ps = con.prepareStatement(Select);
-			ResultSet res = ps.executeQuery();
-			while (res.next()) {
-				int id = res.getInt(1);
-				String name = res.getString(2);
-				String gender = res.getString(3);
-				Double salary = res.getDouble(4);
-				String date = res.getString(5);
-				System.out.println("id- " + id + " Name -" + name + " gender- " + gender + "|" + " salary -" + salary
-						+ " date- " + date);
-			}
+			Statement st = con.createStatement();
+			st.execute("select sum(salary) from employee_payroll");
+			st.execute("select avg(salary) from employee_payroll");
+			st.execute("select min(salary) from employee_payroll");
+			ResultSet result = st.executeQuery("select min(salary) from employee_payroll");
+			System.out.println(result);
+			
+				
+	        	
+			
 
 		} catch (SQLException e) {
 
