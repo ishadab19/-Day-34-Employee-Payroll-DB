@@ -6,20 +6,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Enumeration;
+
 
 public class EmployeePayroll {
 
-	public static void preparedStatement(String name, double salary) {
+	public static void CreatConnection() {
 
 		try {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
-			String q = "update  employee_payroll set salary=?  where name=?";
-			PreparedStatement ps = con.prepareStatement(q);
-			ps.setDouble(1, salary);
-			ps.setString(2, name);
-			ps.executeUpdate();
-			boolean result = true;
+			String Select = "select * from employee_payroll";
+			PreparedStatement ps = con.prepareStatement(Select);
+			ResultSet res = ps.executeQuery();
+			while (res.next()) {
+				String name = res.getString(2);
+				Double salary = res.getDouble(4);
+				System.out.println("Name -" + name + "|" + "salary -"+salary);
+			}
 
 		} catch (SQLException e) {
 
@@ -29,6 +31,6 @@ public class EmployeePayroll {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		preparedStatement("Tony", 300000.00);
+		CreatConnection();
 	}
 }
