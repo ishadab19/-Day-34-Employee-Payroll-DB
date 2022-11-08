@@ -10,21 +10,21 @@ import java.util.Enumeration;
 
 public class EmployeePayroll {
 
-	public static boolean preparedStatement(String name, double salary) {
-		
+	public static void preparedStatement(String name, double salary) {
+
 		try {
-			Connection	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
 			String q = "update  employee_payroll set salary=?  where name=?";
 			PreparedStatement ps = con.prepareStatement(q);
 			ps.setDouble(1, salary);
 			ps.setString(2, name);
 			ps.executeUpdate();
+			boolean result = true;
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return true;
 
 	}
 
