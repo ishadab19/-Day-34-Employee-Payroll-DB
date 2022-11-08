@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class EmployeePayroll {
 
 	public static void CreatConnection() {
@@ -19,12 +18,7 @@ public class EmployeePayroll {
 			st.execute("select sum(salary) from employee_payroll");
 			st.execute("select avg(salary) from employee_payroll");
 			st.execute("select min(salary) from employee_payroll");
-			ResultSet result = st.executeQuery("select min(salary) from employee_payroll");
-			System.out.println(result);
-			
-				
-	        	
-			
+			st.execute("select count(salary) from employee_payroll");
 
 		} catch (SQLException e) {
 
