@@ -28,6 +28,10 @@ public class EmployeePayroll {
 			e.printStackTrace();
 		}
 		return true;
+		
 
 	}
+	public static void main(String[] args) throws SQLException {
+        preparedStatement("Tony",300000.00);
+}
 }
