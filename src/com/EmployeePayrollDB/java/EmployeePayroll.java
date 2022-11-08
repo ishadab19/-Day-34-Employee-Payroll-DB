@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class EmployeePayroll {
 
 	public static void CreatConnection() {
@@ -18,9 +17,13 @@ public class EmployeePayroll {
 			PreparedStatement ps = con.prepareStatement(Select);
 			ResultSet res = ps.executeQuery();
 			while (res.next()) {
+				int id = res.getInt(1);
 				String name = res.getString(2);
+				String gender = res.getString(3);
 				Double salary = res.getDouble(4);
-				System.out.println("Name -" + name + "|" + "salary -"+salary);
+				String date = res.getString(5);
+				System.out.println("id- " + id + " Name -" + name + " gender- " + gender + "|" + " salary -" + salary
+						+ " date- " + date);
 			}
 
 		} catch (SQLException e) {
