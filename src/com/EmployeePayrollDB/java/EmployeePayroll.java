@@ -9,14 +9,11 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 
 public class EmployeePayroll {
-	public static boolean CreateConnection(String q) {
-		return true;
-	}
 
 	public static boolean preparedStatement(String name, double salary) {
-		Connection con;
+		
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
+			Connection	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "root");
 			String q = "update  employee_payroll set salary=?  where name=?";
 			PreparedStatement ps = con.prepareStatement(q);
 			ps.setDouble(1, salary);
@@ -28,10 +25,10 @@ public class EmployeePayroll {
 			e.printStackTrace();
 		}
 		return true;
-		
 
 	}
+
 	public static void main(String[] args) throws SQLException {
-        preparedStatement("Tony",300000.00);
-}
+		preparedStatement("Tony", 300000.00);
+	}
 }
